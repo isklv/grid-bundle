@@ -11,11 +11,11 @@ class Url extends RenderAbstract
      * @return string
      */
     public function render()
-    {
+    {       
         if ($this->getStringOnly()) {
             return $this->getValue();
         } else {
-            return '<a href="' . $this->getValue() . '" target="_blank">' . $this->getValue() . '</a>';
+            return '<a href="view/' . $this->getRow()->getId() . '" >' . $this->getValue() . '</a>';
         }
     }
 }

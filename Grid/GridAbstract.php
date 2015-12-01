@@ -400,6 +400,7 @@ abstract class GridAbstract
                 $rowValue[$column->getField()] = $column->getRender()
                     ->setValue($rowColumn)
                     ->setStringOnly($this->isExport())
+                    ->setRow($row)
                     ->render();
             }
 

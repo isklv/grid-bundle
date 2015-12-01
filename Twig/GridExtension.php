@@ -148,6 +148,13 @@ class GridExtension extends Twig_Extension
                     'is_safe' => array('html')
                 )
             ),
+            'pedroteixeira_grid_pagination' => new \Twig_Function_Method(
+                $this,
+                'renderPaginationGrid',
+                array(
+                    'is_safe' => array('html')
+                )
+            ),
             'pedroteixeira_grid_js' => new \Twig_Function_Method(
                 $this,
                 'renderJsGrid',
@@ -189,6 +196,25 @@ class GridExtension extends Twig_Extension
         if (!$gridView->getGrid()->isAjax()) {
             return $this->renderBlock(
                 'grid_html',
+                array(
+                    'view' => $gridView
+                )
+            );
+        }
+    }
+    
+    /**
+     * Render (only pagination) grid view
+     *
+     * @param GridView $gridView
+     *
+     * @return mixed
+     */
+    public function renderPaginationGrid(GridView $gridView)
+    {
+        if (!$gridView->getGrid()->isAjax()) {
+            return $this->renderBlock(
+                'grid_pagination',
                 array(
                     'view' => $gridView
                 )

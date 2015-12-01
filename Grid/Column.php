@@ -135,7 +135,7 @@ class Column
     {
         return $this->index;
     }
-
+    
     /**
      * @param string $twig
      *

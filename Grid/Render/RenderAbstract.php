@@ -21,6 +21,11 @@ abstract class RenderAbstract
      * @var bool
      */
     protected $stringOnly = false;
+    
+    /**
+     * @var object
+     */
+    protected $row;
 
     /**
      * @return string
@@ -57,6 +62,26 @@ abstract class RenderAbstract
         return $this->value;
     }
 
+    /**
+     * @param object $row
+     *
+     * @return Column
+     */
+    public function setRow($row)
+    {
+        $this->row = $row;
+    
+        return $this;
+    }
+    
+    /**
+     * @return object
+     */
+    public function getRow()
+    {
+        return $this->row;
+    }
+    
     /**
      * @param boolean $stringOnly
      *
