@@ -71,9 +71,9 @@ class GridExtension extends Twig_Extension
      * @throws \Exception
      */
     protected function getTemplates()
-    {
+    {   
         if (empty($this->templates)) {
-            $this->templates[] = $this->environment->loadTemplate($this::DEFAULT_TEMPLATE);
+            $this->templates[] = $this->environment->loadTemplate($this->container->getParameter('pedro_teixeira_grid.template'));
         }
 
         return $this->templates;

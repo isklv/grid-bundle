@@ -69,6 +69,8 @@ class Configuration implements ConfigurationInterface
                                     ->end()
                                 ->end()
                             ->end()
+                        ->scalarNode('template')
+                            ->defaultValue('PedroTeixeiraGridBundle::block.html.twig')
                         ->end()
                     ->end()
                 ->end()

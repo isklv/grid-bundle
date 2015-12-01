@@ -30,8 +30,8 @@
                 emptyTbody = this.$element.find('table').find('tbody.row-empty'),
                 thisClass = this
 
-            this.page = this.$element.find('#pagination #pagination-page').val()
-            this.limit = this.$element.find('#pagination #pagination-limit').val()
+            //this.page = this.$element.find('#pagination #pagination-page').val()
+            //this.limit = this.$element.find('#pagination #pagination-limit').val()
 
             $.ajax({
                 url:this.ajaxUrl,
@@ -199,7 +199,33 @@
 
         , paginationProcess:function () {
 
-            this.$element.find('#pagination #pagination-back-button').attr('disabled', false)
+            if(this.totalPages){
+            	var $pagination = $('ul#pagination').empty();
+            	
+            	$pagination.append('<li><a href="#"></a></li>');
+            	
+            	for(var i = 1; i <= this.totalPages; i++){
+            		var $page = $('<li><a href="#">'+i+'</a></li>');
+        			$pagination.append($page);
+            		
+        			$page.find('a').on('click', $.proxy(this.paginationPage, this));
+        			
+        			if(i == this.page)  $page.addClass('active')
+            	}
+            	
+            	$pagination.append('<li><a href="#"></a></li>');
+            	
+            	
+            	if(this.page > 1){
+            		$pagination.find('li:first-child a').on('click', $.proxy(this.paginationBack, this));
+            	}
+        		if(this.page < this.totalPages){
+        			$pagination.find('li:last-child a').on('click', $.proxy(this.paginationForward, this));
+            	}
+            	
+            }
+        	
+        	/*this.$element.find('#pagination #pagination-back-button').attr('disabled', false)
             this.$element.find('#pagination #pagination-forward-button').attr('disabled', false)
 
             if (this.page <= 1) {
@@ -215,14 +241,24 @@
             this.$element.find('#pagination #pagination-total').html(this.totalRows)
             this.$element.find('#pagination #pagination-limit').val(this.limit)
 
-            this.$element.find('#pagination input').attr('disabled', false)
+            this.$element.find('#pagination input').attr('disabled', false)*/
 
             return this
         }
 
+        , paginationPage:function (e) {
+        	
+        	if($(e.currentTarget).text() != this.page){
+        		this.page = parseInt($(e.currentTarget).text());
+                this.ajax()
+        	}
+
+            return this
+        }
+        
         , paginationBack:function () {
             this.page --
-            this.$element.find('#pagination #pagination-page').val(this.page)
+            //this.$element.find('#pagination #pagination-page').val(this.page)
 
             this.ajax()
 
@@ -231,7 +267,7 @@
 
         , paginationForward:function () {
             this.page ++
-            this.$element.find('#pagination #pagination-page').val(this.page)
+            //this.$element.find('#pagination #pagination-page').val(this.page)
 
             this.ajax()
 
