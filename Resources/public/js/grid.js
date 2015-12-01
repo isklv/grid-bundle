@@ -199,7 +199,7 @@
 
         , paginationProcess:function () {
 
-            if(this.totalPages){
+            if(this.totalPages > 1){
             	var $pagination = $('ul#pagination').empty();
             	
             	$pagination.append('<li><a href="#"></a></li>');
