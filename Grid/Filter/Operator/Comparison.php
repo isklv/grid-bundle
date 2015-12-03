@@ -135,8 +135,8 @@ class Comparison extends OperatorAbstract
             case 'contain':
 
             default:
-                $where = $expression->like($this->getIndex(), ":{$this->getIndexClean()}");
-                $parameter = '%' . $value . '%';
+                $where = $expression->like('LOWER('.$this->getIndex().')', ":{$this->getIndexClean()}");
+                $parameter = '%' . strtolower($value) . '%';
         }
 
         if ($this->getWhere() == 'OR') {
