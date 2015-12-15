@@ -34,14 +34,11 @@ class Date extends FilterAbstract
     public function render()
     {
         if ($this->getUseDatePicker()) {
-            $html  = '<input ' . $this->getNameAndId() . ' type="text" value="' . $this->getValue() .
+            $html  = '<input class="date-input" ' . $this->getNameAndId() . ' type="text" value="' . $this->getValue() .
                 '" placeholder="' . $this->getPlaceholder() .
                 '" data-date-format="' . strtolower($this->dateFormat) . '">';
-
-            $html .= '<script type="text/javascript">' .
-                '$(document).ready(function () {$("#' . $this->getId() . '").datepicker()})</script>';
         } else {
-            $html = '<input ' . $this->getNameAndId() . ' type="date" value="' . $this->getValue() .
+            $html = '<input class="date-input" ' . $this->getNameAndId() . ' type="date" value="' . $this->getValue() .
                 '" placeholder="' . $this->getPlaceholder() . '">';
         }
 

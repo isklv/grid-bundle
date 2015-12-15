@@ -9,6 +9,10 @@ use Symfony\Component\Locale\Stub\DateFormat\FullTransformer;
  */
 class Date extends RenderAbstract
 {
+    private $format;
+    
+    private $locale;
+    
     /**
      * @return string
      */
@@ -17,11 +21,19 @@ class Date extends RenderAbstract
         if ($this->getValue() instanceof \DateTime) {
 
             $transformer = new FullTransformer(
-                $this->container->getParameter('pedro_teixeira_grid.date.date_format'),
-                $this->container->getParameter('locale')
+                ($this->format ? $this->format : $this->container->getParameter('pedro_teixeira_grid.date.date_format')),
+                ($this->locale ? $this->locale : $this->container->getParameter('locale'))
             );
 
             return $transformer->format($this->getValue());
         }
+    }
+    
+    public function setFormat($format, $locale = null)
+    {
+        if($format)
+            $this->format = $format;
+        if($locale)
+            $this->locale = $locale;
     }
 }

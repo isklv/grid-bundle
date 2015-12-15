@@ -101,6 +101,7 @@
         , listen:function () {
             this.$element.find('form').on('submit', $.proxy(this.submit, this))
             this.$element.find('select').on('change', $.proxy(this.ajax, this))
+            this.$element.find('input').on('keyup', $.proxy(function(event){if(event.keyCode == 13) this.ajax()}, this))
 
             this.$element.find('#refresh-button').on('click', $.proxy(this.ajax, this))
             this.$element.find('#refresh-filters-button').on('click', $.proxy(this.refreshFilters, this))
@@ -109,6 +110,9 @@
 
             this.$element.find('#pagination-back-button').on('click', $.proxy(this.paginationBack, this))
             this.$element.find('#pagination-forward-button').on('click', $.proxy(this.paginationForward, this))
+            
+            this.$element.find('input.date-input').datetimepicker({ format: 'Y-m-d', timepicker: false});
+            //this.$element.find('input.date-time-input').datetimepicker({ format: 'Y-m-d H:i'});
 
             return this
         }
@@ -199,18 +203,20 @@
 
         , paginationProcess:function () {
 
-            if(this.totalPages > 1){
-            	var $pagination = $('ul#pagination').empty();
+        	var $pagination = $('ul.paging').hide().empty();
+        	
+        	if(this.totalPages > 1){
             	
             	$pagination.append('<li><a href="#"></a></li>');
             	
             	for(var i = 1; i <= this.totalPages; i++){
             		var $page = $('<li><a href="#">'+i+'</a></li>');
-        			$pagination.append($page);
-            		
+
         			$page.find('a').on('click', $.proxy(this.paginationPage, this));
         			
-        			if(i == this.page)  $page.addClass('active')
+        			if(i == this.page)  $page.addClass('active');
+        			
+        			$pagination.append($page);
             	}
             	
             	$pagination.append('<li><a href="#"></a></li>');
@@ -223,6 +229,7 @@
         			$pagination.find('li:last-child a').on('click', $.proxy(this.paginationForward, this));
             	}
             	
+        		$pagination.show();
             }
         	
         	/*this.$element.find('#pagination #pagination-back-button').attr('disabled', false)

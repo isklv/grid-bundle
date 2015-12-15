@@ -22,6 +22,10 @@ class Comparison extends OperatorAbstract
         $expression = $this->getQueryBuilder()->expr();
 
         switch ($this->getComparisonType()) {
+            case 'instance_of':
+                $where = $this->getIndex() . " INSTANCE OF :{$this->getIndexClean()}";
+                break;
+                
             case 'equal':
                 $where = $expression->eq($this->getIndex(), ":{$this->getIndexClean()}");
                 break;

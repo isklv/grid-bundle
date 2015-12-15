@@ -24,12 +24,12 @@ class DateRange extends OperatorAbstract
 
         if (!empty($value[0])) {
 
-            $transformer = new FullTransformer(
+            /* $transformer = new FullTransformer(
                 $this->container->getParameter('pedro_teixeira_grid.date.date_format'),
                 $this->container->getParameter('locale')
-            );
-            $date = new \DateTime();
-            $transformer->parse($date, $value[0]);
+            ); */
+            $date = new \DateTime($value[0]);
+            //$transformer->parse($date, $value[0]);
 
             $queryBuilder->andWhere(
                 $queryBuilder->expr()->gte(
@@ -45,12 +45,12 @@ class DateRange extends OperatorAbstract
 
         if (!empty($value[1])) {
 
-            $transformer = new FullTransformer(
+            /* $transformer = new FullTransformer(
                 $this->container->getParameter('pedro_teixeira_grid.date.date_format'),
                 $this->container->getParameter('locale')
-            );
-            $date = new \DateTime();
-            $transformer->parse($date, $value[1]);
+            ); */
+            $date = new \DateTime($value[1]);
+            //$transformer->parse($date, $value[1]);
 
             $queryBuilder->andWhere(
                 $queryBuilder->expr()->lte(
@@ -63,5 +63,6 @@ class DateRange extends OperatorAbstract
                     $date->format('Y-m-d') . ' 23:59:59'
                 );
         }
+
     }
 }
