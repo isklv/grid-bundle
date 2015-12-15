@@ -268,6 +268,14 @@ abstract class GridAbstract
 
         return $exportFile;
     }
+    
+    /**
+     * @return integer
+     */
+    public function getPaginationLimit()
+    {
+        return $this->container->getParameter('pedro_teixeira_grid.pagination.limit');
+    }
 
     /**
      * Process the filters and return the result
@@ -276,7 +284,7 @@ abstract class GridAbstract
      */
     public function getData()
     {
-        $defaultLimit = $this->container->getParameter('pedro_teixeira_grid.pagination.limit');
+        $defaultLimit = $this->getPaginationLimit();
 
         $page       = $this->request->query->get('page', 1);
         $limit      = $this->request->query->get('limit', $defaultLimit);

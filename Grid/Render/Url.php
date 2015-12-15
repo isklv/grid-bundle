@@ -7,6 +7,8 @@ namespace PedroTeixeira\Bundle\GridBundle\Grid\Render;
  */
 class Url extends RenderAbstract
 {
+    private $path = 'view/';
+    
     /**
      * @return string
      */
@@ -15,7 +17,12 @@ class Url extends RenderAbstract
         if ($this->getStringOnly()) {
             return $this->getValue();
         } else {
-            return '<a href="view/' . $this->getRow()->getId() . '" >' . $this->getValue() . '</a>';
+            return '<a href="' . $this->path . $this->getRow()->getId() . '" >' . $this->getValue() . '</a>';
         }
+    }
+    
+    public function setPath($path)
+    {
+        $this->path = $path;
     }
 }

@@ -42,6 +42,6 @@ class GridView
      */
     public function getPaginationLimit()
     {
-        return $this->container->getParameter('pedro_teixeira_grid.pagination.limit');
+        return $this->grid->getPaginationLimit();
     }
 }

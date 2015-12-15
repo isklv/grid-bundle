@@ -23,7 +23,7 @@
 
         constructor:Grid
 
-        , ajax:function () {
+        , ajax:function (e) {
 
             var filters = this.$element.find('form').serializeArray(),
                 tbody = this.$element.find('table').find('tbody.row-result'),
@@ -31,8 +31,10 @@
                 thisClass = this
 
             //this.page = this.$element.find('#pagination #pagination-page').val()
-            //this.limit = this.$element.find('#pagination #pagination-limit').val()
-
+            
+            if(e && $(e.currentTarget).hasClass('pagination-limit'))
+            	this.limit = $(e.currentTarget).find('option:selected').val();	
+            	
             $.ajax({
                 url:this.ajaxUrl,
                 type:'get',
@@ -82,6 +84,8 @@
                     } else {
                         emptyTbody.show()
                     }
+                    
+                    $('.pagination-limit option[value='+thisClass.limit+']').prop('selected', true);
 
                     tbody.html(html)
                 },
@@ -101,6 +105,7 @@
         , listen:function () {
             this.$element.find('form').on('submit', $.proxy(this.submit, this))
             this.$element.find('select').on('change', $.proxy(this.ajax, this))
+            $('select.pagination-limit').on('change', $.proxy(this.ajax, this))
             this.$element.find('input').on('keyup', $.proxy(function(event){if(event.keyCode == 13) this.ajax()}, this))
 
             this.$element.find('#refresh-button').on('click', $.proxy(this.ajax, this))
