@@ -116,7 +116,7 @@
             this.$element.find('#pagination-back-button').on('click', $.proxy(this.paginationBack, this))
             this.$element.find('#pagination-forward-button').on('click', $.proxy(this.paginationForward, this))
             
-            this.$element.find('input.date-input').datetimepicker({ format: 'Y-m-d', timepicker: false});
+            this.$element.find('input.date-input').datetimepicker({ format: 'Y-m-d', timepicker: false, onChangeDateTime: $.proxy(this.ajax, this), scrollInput: false});
             //this.$element.find('input.date-time-input').datetimepicker({ format: 'Y-m-d H:i'});
 
             return this
