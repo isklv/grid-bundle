@@ -30,6 +30,8 @@
                 emptyTbody = this.$element.find('table').find('tbody.row-empty'),
                 thisClass = this
 
+            if(!filters.length)
+            	return;
             //this.page = this.$element.find('#pagination #pagination-page').val()
             
             if(e && $(e.currentTarget).hasClass('pagination-limit'))

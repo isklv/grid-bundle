@@ -328,7 +328,8 @@ abstract class GridAbstract
         }
 
         if ($sortIndex) {
-            if(count(explode('.', $sortIndex)) > 0 )
+
+            if(count(explode('.', $sortIndex)) == 1 )
                 $sortIndex = $sortIndex.'.id';
             
             $this->getQueryBuilder()->orderBy($sortIndex, $sortOrder);
