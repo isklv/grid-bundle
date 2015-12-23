@@ -13,6 +13,7 @@
         this.sortIndex = ''
         this.sortOrder = 'ASC'
         this.page = 1
+        this.gridName = 'grid'
         this.totalRows = 0
         this.totalPages = 0
         this.listen()
@@ -37,11 +38,14 @@
             if(e && $(e.currentTarget).hasClass('pagination-limit'))
             	this.limit = $(e.currentTarget).find('option:selected').val();	
             	
+            this.gridName = this.$element.find('table').attr('data-name');
+            
             $.ajax({
                 url:this.ajaxUrl,
                 type:'get',
                 data:{
                     'page':this.page,
+                    'grid_name':this.gridName,
                     'limit':this.limit,
                     'sort': this.sortIndex,
                     'sort_order': this.sortOrder,
